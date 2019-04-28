@@ -20,8 +20,11 @@ class App {
       express: this.express,
       autoescape: true
     }) // determina qual a syntax da barra para windows linux mac
+    this.express.use(express.static(path.resolve(__dirname, 'public')))
     this.express.set('view engine', 'njk')
   }
-  routes () {}
+  routes () {
+    this.express.use(require('./routes'))
+  }
 }
 module.exports = new App().express // exporta uma instancia da classe app
