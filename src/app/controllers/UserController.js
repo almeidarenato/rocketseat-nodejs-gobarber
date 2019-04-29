@@ -5,8 +5,10 @@ class UserController {
     return response.render('auth/signup')
   }
   async store (request, response) {
-    request.body.avatar = 'teste.jpg'
-    await User.create(request.body)
+    const { filename: avatar } = request.file
+
+    await User.create({ ...request.body, avatar })
+
     return response.redirect('/')
   }
 }
