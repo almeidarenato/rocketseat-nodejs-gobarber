@@ -15,6 +15,8 @@ class SessionController {
       console.warn('Senha Incorreta')
       return response.redirect('/')
     }
+    request.session.user = user
+
     return response.redirect('/app/dashboard')
   }
 }
