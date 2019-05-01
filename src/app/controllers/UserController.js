@@ -5,8 +5,13 @@ class UserController {
     return response.render('auth/signup')
   }
   async store (request, response) {
-    const { filename: avatar } = request.file
+    const { name } = request.body
+    if (name === '' || name.length === 0 || name === null) {
+      request.flash('error', 'Informe um nome para se cadastrar')
+      return response.redirect('/signup')
+    }
 
+    const { filename: avatar } = request.file || 'default'
     await User.create({ ...request.body, avatar })
 
     return response.redirect('/')
