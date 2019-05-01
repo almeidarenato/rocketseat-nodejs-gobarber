@@ -9,12 +9,13 @@ const routes = express.Router()
 const UserController = require('./app/controllers/UserController')
 const SessionController = require('./app/controllers/SessionController')
 const DashboardController = require('./app/controllers/DashboardController')
-
+const FileController = require('./app/controllers/FileController')
 routes.use((request, response, next) => {
   response.locals.flashSuccess = request.flash('success')
   response.locals.flashError = request.flash('error')
   return next()
 })
+routes.get('/files/:file', FileController.show)
 routes.get('/', guestMiddleware, SessionController.create)
 routes.post('/signin', guestMiddleware, SessionController.store)
 
