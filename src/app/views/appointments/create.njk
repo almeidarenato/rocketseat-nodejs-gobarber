@@ -9,11 +9,7 @@
   </div>
   <form action="/app/appointments/new/{{ provider.id }}" method="post">
     <input type="text" class="flatpickr" placeholder="Escolha uma data" />
-    <div id="hours">
-      <label><input type="radio" />12:00</label>
-      <label><input type="radio" />13:00</label>
-      <label><input type="radio" />14:00</label>
-    </div>
+    <div id="hours"></div>
     <button type="submit">Agendar</button>
   </form>
 </div>
@@ -22,7 +18,13 @@
     minDate: new Date(),
     dateFormat: "d/M/Y",
     onChange: date =>
-      fetch(`/app/available/{{provider.id}}?date=${date[0].getTime()}`)
+      fetch(`/app/available/{{provider.id}}?date=${date[0].getTime()}`).then(
+        function(response) {
+          response.text().then(function(html) {
+            document.getElementById("hours").innerHTML = html;
+          });
+        }
+      )
   });
 </script>
 {% endblock %}
