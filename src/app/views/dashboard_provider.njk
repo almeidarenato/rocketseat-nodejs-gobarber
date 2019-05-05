@@ -1,0 +1,38 @@
+{% extends "_layouts/default.njk" %} {% block body %}
+
+<div class="content">
+  <strong>Olá, {{ user.name }} </strong>
+  <p>Veja os agendamentos feitos</p>
+  <ul class="providers">
+    {% for appointment in appointments%}
+    <li class="data">
+      <div>
+        <img
+          class="data-img"
+          src="/files/{{ appointment.User.avatar }}"
+          class="data"
+        />
+      </div>
+      <div>
+        <strong>{{ appointment.User.name }}</strong
+        ><br />
+        <span>{{ appointment.User.email }}</span
+        ><br />
+        <label for="data">Horario agendado:</label>
+        <input type="text" name="data" value="{{ appointment.date }}" />
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <a href="/app/logout" class="logout">Sair</a>
+</div>
+<script>
+  const inputs = document.querySelectorAll("input");
+  console.log(inputs);
+  for (input of inputs) {
+    let timestamp = new Date(input.value);
+    console.log(timestamp);
+    input.setAttribute("value", timestamp.toLocaleString());
+  }
+</script>
+{% endblock %}

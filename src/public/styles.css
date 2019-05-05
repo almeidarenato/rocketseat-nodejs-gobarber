@@ -290,3 +290,14 @@ ul.providers {
 .main-wrapper .content form button:hover {
   background: #634dac;
 }
+.data {
+  display: flex;
+  padding-bottom: 15px;
+  line-height: 20px;
+}
+.data-img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 14px;
+}
